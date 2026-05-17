@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>TRG Testimonial Interview #1</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background: #F5F5F7;
+    color: #1D1D1F;
+    padding: 2rem 1rem 4rem;
+    min-height: 100vh;
+  }
+
+  .container { max-width: 780px; margin: 0 auto; }
+
+  /* HEADER */
+  .page-header {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+  .page-header .logo {
+    font-size: 13px; font-weight: 600; letter-spacing: 0.1em;
+    text-transform: uppercase; color: #7F77DD; margin-bottom: 8px;
+  }
+  .page-header h1 {
+    font-size: 26px; font-weight: 600; color: #1D1D1F; margin-bottom: 4px;
+  }
+  .page-header p {
+    font-size: 13px; color: #86868B;
+  }
+
+  /* INTRO BLOCK */
+  .intro-block {
+    background: #fff;
+    border-radius: 16px;
+    border: 1px solid #E5E5EA;
+    padding: 24px 26px 22px;
+    margin-bottom: 2rem;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+  }
+  .intro-title { font-size: 16px; font-weight: 600; color: #1D1D1F; margin-bottom: 8px; }
+  .intro-welcome { font-size: 13.5px; color: #3A3A3C; line-height: 1.75; margin-bottom: 18px; }
+  .purpose-label { font-size: 10.5px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: #86868B; margin-bottom: 12px; }
+
+  .purpose-item { display: flex; gap: 12px; align-items: flex-start; margin-bottom: 12px; }
+  .purpose-pill {
+    font-size: 11px; font-weight: 600; border-radius: 20px;
+    padding: 3px 10px; white-space: nowrap; margin-top: 2px; flex-shrink: 0;
+  }
+  .pill-purple { background: #EEEDFE; color: #3C3489; }
+  .pill-teal   { background: #E1F5EE; color: #085041; }
+  .pill-coral  { background: #FAECE7; color: #712B13; }
+  .purpose-text { font-size: 13px; color: #3A3A3C; line-height: 1.65; }
+  .connector { font-style: italic; color: #AEAEB2; font-size: 12px; margin: 2px 0 10px 2px; }
+
+  /* SECTION */
+  .section { margin-bottom: 2rem; }
+  .section-title {
+    font-size: 13px; font-weight: 600;
+    color: #1D1D1F;
+    border-left: 3px solid #7F77DD;
+    padding-left: 10px;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+
+  /* CARD */
+  .card {
+    background: #fff;
+    border: 1px solid #E5E5EA;
+    border-radius: 12px;
+    margin-bottom: 8px;
+    overflow: hidden;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+    transition: box-shadow 0.2s;
+  }
+  .card:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+
+  .card-header {
+    display: flex; align-items: flex-start; gap: 10px;
+    padding: 13px 16px; cursor: pointer; user-select: none;
+  }
+  .q-num {
+    font-size: 11px; font-weight: 600; color: #AEAEB2;
+    min-width: 32px; padding-top: 2px; flex-shrink: 0;
+  }
+  .q-text {
+    font-size: 13.5px; font-weight: 500; color: #1D1D1F;
+    flex: 1; line-height: 1.5;
+  }
+  .badges { display: flex; gap: 5px; flex-shrink: 0; align-items: flex-start; flex-wrap: wrap; justify-content: flex-end; }
+  .q-badge {
+    font-size: 10px; font-weight: 600; border-radius: 20px;
+    padding: 2px 8px; white-space: nowrap; margin-top: 2px;
+    background: #E1F5EE; color: #085041;
+  }
+  .off-record {
+    font-size: 10px; font-weight: 600; border-radius: 20px;
+    padding: 2px 8px; white-space: nowrap; margin-top: 2px;
+    background: #FFF3E0; color: #633806;
+  }
+  .chevron {
+    font-size: 10px; color: #AEAEB2;
+    transition: transform 0.25s ease; padding-top: 4px; flex-shrink: 0;
+  }
+  .card.open .chevron { transform: rotate(180deg); }
+
+  /* FOLLOWUPS */
+  .followups {
+    display: none;
+    padding: 0 16px 14px 54px;
+    border-top: 1px solid #F2F2F7;
+  }
+  .card.open .followups { display: block; }
+
+  .fu-label {
+    font-size: 10px; font-weight: 600; text-transform: uppercase;
+    letter-spacing: 0.06em; color: #AEAEB2; margin: 10px 0 6px;
+  }
+  .fu-item {
+    font-size: 13px; color: #3A3A3C; line-height: 1.65;
+    padding: 6px 0; border-top: 1px solid #F2F2F7;
+    display: flex; gap: 9px; align-items: flex-start;
+  }
+  .fu-item:first-of-type { border-top: none; padding-top: 0; }
+  .fu-dot {
+    width: 5px; height: 5px; border-radius: 50%;
+    background: #7F77DD; margin-top: 8px; flex-shrink: 0;
+  }
+  .tip {
+    font-size: 12px; margin-top: 10px;
+    padding: 8px 12px; border-radius: 8px;
+    background: #F5F5F7;
+    border-left: 2px solid #7F77DD;
+    color: #6E6E73; font-style: italic; line-height: 1.6;
+  }
+
+  /* PRINT */
+  @media print {
+    body { background: #fff; padding: 1rem; }
+    .card { box-shadow: none; border: 1px solid #ccc; }
+    .followups { display: block !important; }
+    .chevron { display: none; }
+  }
+
+  @media (max-width: 600px) {
+    .page-header h1 { font-size: 20px; }
+    .card-header { padding: 11px 12px; }
+    .followups { padding-left: 40px; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- HEADER -->
+  <div class="page-header">
+    <div class="logo">TRG International</div>
+    <h1>Testimonial Interview <span style="color:#7F77DD">#1</span></h1>
+    <p>Interviewer reference — click any question to expand follow-up prompts</p>
+  </div>
+
+  <!-- INTRO BLOCK -->
+  <div class="intro-block">
+    <div class="intro-title">Welcome &amp; Introduction</div>
+    <div class="intro-welcome">
+      Thank you so much for taking the time to be here today. This is a <strong>testimonial interview</strong> — think of it as a relaxed conversation about your internship experience at TRG. There are no right or wrong answers, so just speak freely and share whatever feels true to you.
+    </div>
+    <div class="purpose-label">Why we do this</div>
+
+    <div class="purpose-item">
+      <span class="purpose-pill pill-purple">Feedforward</span>
+      <span class="purpose-text">First and foremost, your honest feedback helps us understand what's working well and what we can do better — so future interns have an even stronger experience.</span>
+    </div>
+    <div class="connector">Beyond that…</div>
+    <div class="purpose-item">
+      <span class="purpose-pill pill-teal">Professional Development</span>
+      <span class="purpose-text">This is also a great opportunity for you to pause and reflect on the skills and knowledge you've built during your time here — something that will come in handy when you talk to future employers.</span>
+    </div>
+    <div class="connector">And finally…</div>
+    <div class="purpose-item" style="margin-bottom:0">
+      <span class="purpose-pill pill-coral">Marketing</span>
+      <span class="purpose-text">With your permission, your testimonial may be used to share the program's story and inspire the next generation of interns to apply.</span>
+    </div>
+  </div>
+
+  <!-- PART 1 -->
+  <div class="section">
+    <div class="section-title">Part 1 — Demographics</div>
+
+    <div class="card" onclick="toggle(this)">
+      <div class="card-header">
+        <span class="q-num">1.1</span>
+        <span class="q-text">Could you please tell your name and where are you from?</span>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="followups">
+        <div class="fu-label">If they seem shy</div>
+        <div class="fu-item"><span class="fu-dot"></span>Just your name and where you grew up — wherever you call home — is perfect to start!</div>
+      </div>
+    </div>
+
+    <div class="card" onclick="toggle(this)">
+      <div class="card-header">
+        <span class="q-num">1.2</span>
+        <span class="q-text">Are you currently based in your home country?</span>
+        <div class="badges"><span class="q-badge">International intern</span></div>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="followups">
+        <div class="fu-label">If they look confused</div>
+        <div class="fu-item"><span class="fu-dot"></span>In other words — are you doing this internship from your home country, or are you living somewhere else right now, like Vietnam?</div>
+      </div>
+    </div>
+
+    <div class="card" onclick="toggle(this)">
+      <div class="card-header">
+        <span class="q-num">1.3</span>
+        <span class="q-text">Which University are you currently studying at?</span>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="followups">
+        <div class="fu-label">Tip</div>
+        <div class="fu-item"><span class="fu-dot"></span>If international, also confirm the country — it adds nice context for the testimonial.</div>
+      </div>
+    </div>
+
+    <div class="card" onclick="toggle(this)">
+      <div class="card-header">
+        <span class="q-num">1.4</span>
+        <span class="q-text">What are you currently studying at the University?</span>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="followups">
+        <div class="fu-label">If they only name the course</div>
+        <div class="fu-item"><span class="fu-dot"></span>Is it more on the technical side, the business side, or somewhere in between?</div>
+        <div class="fu-item"><span class="fu-dot"></span>Do you feel your studies connect to what you've been doing here at TRG?</div>
+      </div>
+    </div>
+
+    <div class="card" onclick="toggle(this)">
+      <div class="card-header">
+        <span class="q-num">1.5</span>
+        <span class="q-text">Are you studying virtually or in the University campus?</span>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="followups">
+        <div class="fu-label">If they're unsure how to answer</div>
+        <div class="fu-item"><span class="fu-dot"></span>For example — do you go to class in person, join everything online, or maybe a mix of both?</div>
+      </div>
+    </div>
+
+    <div class="card" onclick="toggle(this)">
+      <div class="card-header">
+        <span class="q-num">1.6</span>
+        <span class="q-text">How do you feel about your online experience at your University?</span>
+        <div class="badges"><span class="q-badge">If virtual</span></div>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="followups">
+        <div class="fu-label">If they give a one-word answer like "okay" or "fine"</div>
+        <div class="fu-item"><span class="fu-dot"></span>What's been the nicest thing about studying online for you — maybe more flexibility, no commute?</div>
+        <div class="fu-item"><span class="fu-dot"></span>And on the flip side, is there anything you miss about being in a physical classroom or campus?</div>
+        <div class="tip">Offer both sides (positive + what they miss) — it gives them permission to be honest without feeling like they're complaining.</div>
+      </div>
+    </div>
+
+    <div class="card" onclick="toggle(this)">
+      <div class="card-header">
+        <span class="q-num">1.7</span>
+        <span class="q-text">What's your University doing to help promote online connection with the students?</span>
+        <div class="badges"><span class="q-badge">If virtual</span></div>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="followups">
+        <div class="fu-label">If they draw a blank</div>
+        <div class="fu-item"><span class="fu-dot"></span>For example — things like virtual events, online clubs, group chats, or any sessions where students can just hang out and connect?</div>
+        <div class="fu-item"><span class="fu-dot"></span>And do those things actually make a difference for you, or does it still feel a bit distant?</div>
+      </div>
+    </div>
+
+    <div class="card" onclick="toggle(this)">
+      <div class="card-header">
+        <span class="q-num">1.8</span>
+        <span class="q-text">Are you an international student?</span>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="followups">
+        <div class="fu-label">If they're unsure what "international" means here</div>
+        <div class="fu-item"><span class="fu-dot"></span>Just to clarify — by international, I mean are you studying in a country different from where you're originally from, or are you currently outside Vietnam?</div>
+      </div>
+    </div>
+
+    <div class="card" onclick="toggle(this)">
+      <div class="card-header">
+        <span class="q-num">1.9</span>
+        <span class="q-text">How are you coping with your studies and internship?</span>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="followups">
+        <div class="fu-label">If they say "it's fine" or "it's busy"</div>
+        <div class="fu-item"><span class="fu-dot"></span>What's been the trickiest part to juggle — is it finding the time, keeping your energy up, or something else?</div>
+        <div class="fu-item"><span class="fu-dot"></span>What's helped you stay on top of things — any habits or strategies that actually work for you?</div>
+        <div class="tip">Keep it light and validating — frame the question as "you're clearly making it work, how?" rather than focusing on struggle.</div>
+      </div>
+    </div>
+
+    <div class="card" onclick="toggle(this)">
+      <div class="card-header">
+        <span class="q-num">1.10</span>
+        <span class="q-text">What set-up do you prefer more, online or in-campus? And why?</span>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="followups">
+        <div class="fu-label">If they genuinely can't choose</div>
+        <div class="fu-item"><span class="fu-dot"></span>Think about a typical day — which setup leaves you feeling more energized or more connected to the people around you?</div>
+        <div class="fu-item"><span class="fu-dot"></span>Interesting follow-up: does your preference for studying differ from your preference for working?</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PART 2 -->
+  <div class="section">
+    <div class="section-title">Part 2 — Source</div>
+
+    <div class="card" onclick="toggle(this)">
+      <div class="card-header">
+        <span class="q-num">2.1</span>
+        <span class="q-text">How did you hear about the TRG internship?</span>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="followups">
+        <div class="fu-label">If they give a short answer (e.g. "LinkedIn")</div>
+        <div class="fu-item"><span class="fu-dot"></span>Was it a job post you came across, a friend who told you about it, or maybe a notice from your university?</div>
+      </div>
+    </div>
+
+    <div class="card" onclick="toggle(this)">
+      <div class="card-header">
+        <span class="q-num">2.2</span>
+        <span class="q-text">Why did you select TRG for your internship?</span>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="followups">
+        <div class="fu-label">If they say "I just applied and it worked out"</div>
+        <div class="fu-item"><span class="fu-dot"></span>Once you found out more about TRG — before you started — was there anything that made you feel excited, or maybe a little nervous?</div>
+        <div class="fu-item"><span class="fu-dot"></span>Now that you're here, has it matched what you were expecting — or has it been different in some way?</div>
+      </div>
+    </div>
+
+    <div class="card" onclick="toggle(this)">
+      <div class="card-header">
+        <span class="q-num">2.3</span>
+        <span class="q-text">Is this your first internship?</span>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="followups">
+        <div class="fu-label">If yes</div>
+        <div class="fu-item"><span class="fu-dot"></span>And how has the reality of it compared to what you imagined an internship would feel like?</div>
+      </div>
+    </div>
+
+    <div class="card" onclick="toggle(this)">
+      <div class="card-header">
+        <span class="q-num">2.4</span>
+        <span class="q-text">How would you compare this program with the program you attended previously?</span>
+        <div class="badges"><span class="q-badge">If not first</span></div>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="followups">
+        <div class="fu-label">If they struggle to compare</div>
+        <div class="fu-item"><span class="fu-dot"></span>Think about things like — the structure, how supported you felt, the kind of work you were given, or just how welcome you felt walking in.</div>
+        <div class="fu-item"><span class="fu-dot"></span>What's one thing TRG does differently — whether that's something you appreciate, or something you'd suggest improving?</div>
+      </div>
+    </div>
+
+    <div class="card" onclick="toggle(this)">
+      <div class="card-header">
+        <span class="q-num">2.5</span>
+        <span class="q-text">Is this a virtual or in-house or hybrid internship?</span>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="followups">
+        <div class="fu-label">If they're unsure</div>
+        <div class="fu-item"><span class="fu-dot"></span>For example — do you come into the office, work fully from home, or sometimes a bit of both?</div>
+      </div>
+    </div>
+
+    <div class="card" onclick="toggle(this)">
+      <div class="card-header">
+        <span class="q-num">2.6</span>
+        <span class="q-text">What challenges have you faced doing a (virtual) internship?</span>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="followups">
+        <div class="fu-label">If they give a general answer like "communication" or "time zones"</div>
+        <div class="fu-item"><span class="fu-dot"></span>Can you think of a specific moment where that really came up? What did you do?</div>
+        <div class="fu-item"><span class="fu-dot"></span>Did TRG help you work through it, or did you mostly figure it out on your own?</div>
+        <div class="fu-item"><span class="fu-dot"></span>Looking back now, is there anything you'd handle differently?</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PART 3 -->
+  <div class="section">
+    <div class="section-title">Part 3 — Diversity &amp; Inclusion</div>
+
+    <div class="card" onclick="toggle(this)">
+      <div class="card-header">
+        <span class="q-num">3.1</span>
+        <span class="q-text">What does Diversity mean to you?</span>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="followups">
+        <div class="fu-label">If they freeze or say "I'm not sure"</div>
+        <div class="fu-item"><span class="fu-dot"></span>Think about any group you've been part of — a class, a sports team, a club. What made the people there different from each other?</div>
+        <div class="fu-item"><span class="fu-dot"></span>Is diversity only about things like nationality or appearance — or do you think it goes deeper than that?</div>
+        <div class="tip">Start from a memory, not a definition — almost everyone can describe a diverse group they've been in, even if they can't define the word.</div>
+      </div>
+    </div>
+
+    <div class="card" onclick="toggle(this)">
+      <div class="card-header">
+        <span class="q-num">3.2</span>
+        <span class="q-text">How do you feel about the concept of Diversity?</span>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="followups">
+        <div class="fu-label">If they say "it's important" and trail off</div>
+        <div class="fu-item"><span class="fu-dot"></span>When you're working or studying with people who are very different from you — does that feel energizing, a little uncomfortable, or both at once?</div>
+        <div class="fu-item"><span class="fu-dot"></span>Has your sense of what diversity means actually shifted since joining TRG?</div>
+        <div class="tip">Normalizing "both" (energizing AND uncomfortable) makes it safe to give an honest, nuanced answer.</div>
+      </div>
+    </div>
+
+    <div class="card" onclick="toggle(this)">
+      <div class="card-header">
+        <span class="q-num">3.3</span>
+        <span class="q-text">Do you think TRG is Diverse?</span>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="followups">
+        <div class="fu-label">To get past "yes/no"</div>
+        <div class="fu-item"><span class="fu-dot"></span>What gave you that impression — was it the people on your team, the broader company, or the overall culture?</div>
+        <div class="fu-item"><span class="fu-dot"></span>Compared to your university or other places you've been — where would you put TRG on the spectrum?</div>
+      </div>
+    </div>
+
+    <div class="card" onclick="toggle(this)">
+      <div class="card-header">
+        <span class="q-num">3.4</span>
+        <span class="q-text">What does Inclusion mean to you?</span>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="followups">
+        <div class="fu-label">If they mix it up with Diversity or go quiet</div>
+        <div class="fu-item"><span class="fu-dot"></span>Here's a way to think about it: <em>Diversity is being invited to the party — Inclusion is being asked to dance.</em> Does that resonate?</div>
+        <div class="fu-item"><span class="fu-dot"></span>Think of a time you felt truly heard in a group — like your opinion actually mattered. What made that happen?</div>
+        <div class="fu-item"><span class="fu-dot"></span>Do you think a team can be diverse but still not feel inclusive? What would that look like?</div>
+        <div class="tip">"Diversity is being invited to the party — Inclusion is being asked to dance." Use this if they're stuck — it almost always unlocks the conversation.</div>
+      </div>
+    </div>
+
+    <div class="card" onclick="toggle(this)">
+      <div class="card-header">
+        <span class="q-num">3.5</span>
+        <span class="q-text">How do you feel about the concept of Inclusion?</span>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="followups">
+        <div class="fu-label">If they give a safe, surface-level answer</div>
+        <div class="fu-item"><span class="fu-dot"></span>Have you ever been in a situation — at school, at work, anywhere — where you felt like you weren't quite part of the group? What did that feel like?</div>
+        <div class="fu-item"><span class="fu-dot"></span>In a perfect world, what does an inclusive workplace actually look like on a normal Tuesday — not in theory, but in practice?</div>
+        <div class="tip">The first question gives them permission to share a real experience. The "normal Tuesday" framing makes the second one concrete and easy to picture.</div>
+      </div>
+    </div>
+
+    <div class="card" onclick="toggle(this)">
+      <div class="card-header">
+        <span class="q-num">3.6</span>
+        <span class="q-text">Do you think TRG is Inclusive?</span>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="followups">
+        <div class="fu-label">To get a real story, not just a rating</div>
+        <div class="fu-item"><span class="fu-dot"></span>Can you think of a specific moment at TRG where you felt like your voice genuinely mattered?</div>
+        <div class="fu-item"><span class="fu-dot"></span>When you first arrived — as an intern, maybe from another country — did it take time to feel like you belonged, or did the team make that happen quickly?</div>
+        <div class="tip">The second question is powerful for international interns — it invites a personal story almost automatically.</div>
+      </div>
+    </div>
+
+    <div class="card" onclick="toggle(this)">
+      <div class="card-header">
+        <span class="q-num">3.7</span>
+        <span class="q-text">Do you think that TRG is gender balanced?</span>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="followups">
+        <div class="fu-label">If they're not sure</div>
+        <div class="fu-item"><span class="fu-dot"></span>Just think about the people you interact with most — your team, your manager. What's your gut feeling about the balance?</div>
+        <div class="fu-item"><span class="fu-dot"></span>How does that compare to your university, or other companies you've heard about in your field?</div>
+      </div>
+    </div>
+
+    <div class="card" onclick="toggle(this)">
+      <div class="card-header">
+        <span class="q-num">3.8</span>
+        <span class="q-text">Does it surprise you that we are gender balanced? Why?</span>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="followups">
+        <div class="fu-label">If they say "yes" but don't know why</div>
+        <div class="fu-item"><span class="fu-dot"></span>What were you expecting when you joined — did you picture a more male-dominated room, or did you not think about it at all?</div>
+        <div class="fu-item"><span class="fu-dot"></span>Where does that expectation come from — the industry, your home country, or just what you've seen elsewhere?</div>
+      </div>
+    </div>
+
+    <div class="card" onclick="toggle(this)">
+      <div class="card-header">
+        <span class="q-num">3.9</span>
+        <span class="q-text">Does it surprise you that your team is more women/men?</span>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="followups">
+        <div class="fu-label">To move past surprise into reflection</div>
+        <div class="fu-item"><span class="fu-dot"></span>How has working with a team that's mostly [women/men] compared to other teams or groups you've been part of?</div>
+        <div class="fu-item"><span class="fu-dot"></span>Have you noticed anything about how this team communicates or works together that feels different — in a good way or otherwise?</div>
+      </div>
+    </div>
+
+    <div class="card" onclick="toggle(this)">
+      <div class="card-header">
+        <span class="q-num">3.10</span>
+        <span class="q-text">How valuable is the TRG diversity &amp; inclusion experience for you?</span>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="followups">
+        <div class="fu-label">If they say "very valuable" without more detail</div>
+        <div class="fu-item"><span class="fu-dot"></span>If you had to name one thing — one moment or shift in thinking — that this experience gave you, what would it be?</div>
+        <div class="fu-item"><span class="fu-dot"></span>On a scale of 1 to 10, how much were you thinking about diversity and inclusion before this internship? And where are you now?</div>
+        <div class="tip">The 1–10 scale is low-pressure, quick, and almost always produces a genuine and memorable answer on camera.</div>
+      </div>
+    </div>
+
+    <div class="card" onclick="toggle(this)">
+      <div class="card-header">
+        <span class="q-num">3.11</span>
+        <span class="q-text">Do you have a LinkedIn account? If yes, have you connected with TRG employees?</span>
+        <div class="badges"><span class="off-record">Off recording</span></div>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="followups">
+        <div class="fu-label">Action reminder</div>
+        <div class="fu-item"><span class="fu-dot"></span>Pause recording first. Then encourage them to connect with their manager and teammates — suggest searching "TRG International" on LinkedIn and connecting with 2–3 people they've worked with directly.</div>
+      </div>
+    </div>
+
+    <div class="card" onclick="toggle(this)">
+      <div class="card-header">
+        <span class="q-num">3.12</span>
+        <span class="q-text">Please ensure that you write your internship experience so far with TRG.</span>
+        <div class="badges"><span class="off-record">Off recording</span></div>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="followups">
+        <div class="fu-label">Action reminder</div>
+        <div class="fu-item"><span class="fu-dot"></span>Remind them to post about their TRG internship on LinkedIn — even a short post works. Suggest a simple angle: one thing they learned, one project they're proud of, or one thing that surprised them about the experience.</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  function toggle(card) {
+    card.classList.toggle('open');
+  }
+</script>
+</body>
+</html>
